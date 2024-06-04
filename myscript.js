@@ -1,14 +1,14 @@
-var rollV, nameV, genderV, addressV, emailV, surnameV;
+var uidV, firstV, midV, addressV, emailV, lastV;
 
 function readFom() {
-  rollV = document.getElementById("roll").value;
-  nameV = document.getElementById("name").value;
-  genderV = document.getElementById("gender").value;
+  uidV = document.getElementById("uid").value;
+  firstV = document.getElementById("first").value;
+  midV = document.getElementById("mid").value;
   addressV = document.getElementById("address").value;
-  surnameV = document.getElementById("surname").value;
+  lastV = document.getElementById("last").value;
   emailV = document.getElementById("email").value;
   Swal.fire("Data Read Succesfully!");
-  console.log(rollV, nameV, addressV, genderV, surnameV);
+  console.log(uidV, firstV, addressV, midV, lastV);
 }
 
 document.getElementById("insert").onclick = function () {
@@ -16,22 +16,22 @@ document.getElementById("insert").onclick = function () {
 
   firebase
     .database()
-    .ref("student/" + rollV)
+    .ref("student/" + uidV)
     .set({
-      rollNo: rollV,
-      name: nameV,
-      gender: genderV,
+      uid: uidV,
+      first: firstV,
+      mid: midV,
       address: addressV,
-      Surname: surnameV,
+      last: lastV,
       email: emailV
     });
     Swal.fire("Data Inserted Succesfully!");
-  document.getElementById("roll").value = "";
-  document.getElementById("name").value = "";
-  document.getElementById("gender").value = "";
+  document.getElementById("uid").value = "";
+  document.getElementById("first").value = "";
+  document.getElementById("mid").value = "";
   document.getElementById("address").value = "";
   document.getElementById("email").value = "";
-  document.getElementById("surname").value = "";
+  document.getElementById("last").value = "";
 };
 
 document.getElementById("read").onclick = function () {
@@ -39,14 +39,14 @@ document.getElementById("read").onclick = function () {
 
   firebase
     .database()
-    .ref("student/" + rollV)
+    .ref("student/" + uidV)
     .on("value", function (snap) {
-      document.getElementById("roll").value = snap.val().rollNo;
-      document.getElementById("name").value = snap.val().name;
-      document.getElementById("gender").value = snap.val().gender;
+      document.getElementById("uid").value = snap.val().uid;
+      document.getElementById("first").value = snap.val().first;
+      document.getElementById("mid").value = snap.val().mid;
       document.getElementById("address").value = snap.val().address;
       document.getElementById("email").value = snap.val().email;
-      document.getElementById("surname").value = snap.val().surname;
+      document.getElementById("last").value = snap.val().last;
     });
 };
 
@@ -55,36 +55,36 @@ document.getElementById("update").onclick = function () {
 
   firebase
     .database()
-    .ref("student/" + rollV)
+    .ref("student/" + uidV)
     .update({
-      //   rollNo: rollV,
-      name: nameV,
-      gender: genderV,
+      //   uid: uidV,
+      first: firstV,
+      mid: midV,
       address: addressV,
       email: emailV, 
-      surname: surnameV
+      last: lastV
     
     });
     Swal.fire("Data Updated Succesfully!");
-  document.getElementById("roll").value = "";
-  document.getElementById("name").value = "";
-  document.getElementById("gender").value = "";
+  document.getElementById("uid").value = "";
+  document.getElementById("first").value = "";
+  document.getElementById("mid").value = "";
   document.getElementById("address").value = "";
   document.getElementById("email").value = "";
-  document.getElementById("surname").value = "";
+  document.getElementById("last").value = "";
 };
 document.getElementById("delete").onclick = function () {
   readFom();
 
   firebase
     .database()
-    .ref("student/" + rollV)
+    .ref("student/" + uidV)
     .remove();
     Swal.fire("Data Deleted Succesfully!");
-  document.getElementById("roll").value = "";
-  document.getElementById("name").value = "";
-  document.getElementById("gender").value = "";
+  document.getElementById("uid").value = "";
+  document.getElementById("first").value = "";
+  document.getElementById("mid").value = "";
   document.getElementById("address").value = "";
   document.getElementById("email").value = "";
-  document.getElementById("surname").value = "";
+  document.getElementById("last").value = "";
 };
